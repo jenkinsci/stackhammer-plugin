@@ -27,7 +27,7 @@
 	<version>1.0.0-SNAPSHOT</version>
 	<name>Stack Hammer</name>
 	<description>Validates and deploys Puppet configurations using Cloudsmith Stack Hammer</description>
-	<url>http://wiki.jenkins-ci.org/display/JENKINS/StackHammer+Plugin</url>
+	<url>http://wiki.jenkins-ci.org/display/JENKINS/Stack+Hammer+Plugin</url>
 	<developers>
 		<developer>
 			<id>thallgren</id>
