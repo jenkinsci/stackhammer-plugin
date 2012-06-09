@@ -57,9 +57,9 @@
 	</dependencies>
 
 	<scm>
-		<connection>scm:git:git://github.com/cloudsmith/stackhammer-plugin.git</connection>
-		<developerConnection>scm:git:git@github.com:cloudsmith/stackhammer-plugin.git</developerConnection>
-		<url>https://github.com/cloudsmith/stackhammer-plugin</url>
+		<connection>scm:git:git://github.com/jenkinsci/stackhammer-plugin.git</connection>
+		<developerConnection>scm:git:git@github.com:jenkinsci/stackhammer-plugin.git</developerConnection>
+		<url>https://github.com/jenkinsci/stackhammer-plugin</url>
 	</scm>
 
 	<properties>
