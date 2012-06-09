@@ -20,7 +20,6 @@
 		<version>1.420</version>
 	</parent>
 
-	<groupId>org.cloudsmith.hammer.jenkins</groupId>
 	<artifactId>stackhammer</artifactId>
 	<packaging>hpi</packaging>
 	<version>1.0.2-SNAPSHOT</version>
@@ -64,19 +63,5 @@
 	<properties>
 		<java.net.id>thhal</java.net.id>
 	</properties>
-
-	<repositories>
-		<repository>
-			<id>repo.jenkins-ci.org</id>
-			<url>http://repo.jenkins-ci.org/public/</url>
-		</repository>
-	</repositories>
-
-	<pluginRepositories>
-		<pluginRepository>
-			<id>repo.jenkins-ci.org</id>
-			<url>http://repo.jenkins-ci.org/public/</url>
-		</pluginRepository>
-	</pluginRepositories>
 </project>  
  
