@@ -23,9 +23,23 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 
+import net.sf.json.JSONObject;
+
 import org.kohsuke.stapler.QueryParameter;
 
 public abstract class StackOpDescriptor<T extends BuildStep & Describable<T>> extends BuildStepDescriptor<T> {
+
+	public static String getParameter(JSONObject formData, String attributeName) {
+		String value = formData.getString(attributeName);
+		if(value == null)
+			return null;
+
+		value = value.trim();
+		return value.isEmpty()
+				? null
+				: value;
+	}
+
 	public StackOpDescriptor(Class<? extends T> builderClass) {
 		super(builderClass);
 	}

@@ -39,9 +39,13 @@ import org.kohsuke.stapler.StaplerRequest;
  */
 @Extension
 public final class ValidationDescriptor extends StackOpDescriptor<Builder> {
-	private String serviceURL;
+	private static final String DEFAULT_SERVICE_URL = "https://stackservice.cloudsmith.com/service/api";
 
-	private Integer pollInterval;
+	private static final Integer DEFAULT_POLL_INTERVAL = Integer.valueOf(15);
+
+	private String serviceURL = DEFAULT_SERVICE_URL;
+
+	private Integer pollInterval = DEFAULT_POLL_INTERVAL;
 
 	private Integer maxTime;
 
@@ -52,14 +56,20 @@ public final class ValidationDescriptor extends StackOpDescriptor<Builder> {
 
 	@Override
 	public boolean configure(StaplerRequest req, JSONObject formData) throws FormException {
-		String pollInterval = formData.getString("pollInterval");
-		if(pollInterval != null && pollInterval.length() > 0)
-			this.pollInterval = Integer.valueOf(pollInterval);
+		String pollIntervalParam = getParameter(formData, "pollInterval");
+		pollInterval = pollIntervalParam == null
+				? DEFAULT_POLL_INTERVAL
+				: Integer.valueOf(pollIntervalParam);
 
-		String maxTime = formData.getString("maxTime");
-		if(maxTime != null && maxTime.length() > 0)
-			this.maxTime = Integer.valueOf(maxTime);
-		serviceURL = formData.getString("serviceURL");
+		String maxTimeParam = getParameter(formData, "maxTime");
+		maxTime = maxTimeParam == null
+				? null
+				: Integer.valueOf(maxTimeParam);
+
+		String serviceURLParam = getParameter(formData, "serviceURL");
+		serviceURL = serviceURLParam == null
+				? DEFAULT_SERVICE_URL
+				: serviceURLParam;
 
 		save();
 		return super.configure(req, formData);

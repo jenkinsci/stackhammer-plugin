@@ -132,14 +132,7 @@ public class Deployer extends Builder {
 			StackService stackService = factory.createStackService();
 			Repository repo = cloneResult.getResult();
 
-			Integer pollIntervalObj = validationDesc.getPollInterval();
-			long pollInterval = pollIntervalObj == null
-					? 0
-					: pollIntervalObj.longValue();
-
-			if(pollInterval < 1)
-				pollInterval = 1;
-
+			long pollInterval = validationDesc.getPollInterval().longValue();
 			long startTime = System.currentTimeMillis();
 			long lastPollTime = startTime;
 			long failTime = Long.MAX_VALUE;
