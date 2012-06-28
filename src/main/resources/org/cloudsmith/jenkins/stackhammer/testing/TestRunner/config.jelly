@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright 2012-, Cloudsmith Inc.
+
+ Licensed under the Apache License, Version 2.0 (the "License"). You may not
+ use this file except in compliance with the License. You may obtain a copy
+ of the License at http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ License for the specific language governing permissions and limitations
+ under the License.
+-->
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+  <!--
+    This jelly script is used for per-project configuration.
+  -->
+
+  <!--
+    Creates a text field that shows the value of the "name" property.
+    When submitted, it will be passed to the corresponding constructor parameter.
+  -->
+  <f:entry title="Stack" field="stack">
+    <f:textbox />
+  </f:entry>
+  <f:entry title="Branch" field="branch">
+    <f:textbox default="master"/>
+  </f:entry>
+  <f:entry title="Test names" field="testNames">
+    <f:textbox/>
+  </f:entry>
+  <f:entry title="Undeploy Test Harness" field="undeploy">
+    <f:booleanRadio default="false"/>
+  </f:entry>
+  <f:entry title="API Key" field="apiKey">
+    <f:password />
+  </f:entry>
+</j:jelly>
