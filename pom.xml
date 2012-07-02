@@ -24,7 +24,7 @@
 	<packaging>hpi</packaging>
 	<version>1.0.5-SNAPSHOT</version>
 	<name>Stack Hammer</name>
-	<description>Validates and deploys Puppet configurations using Cloudsmith Stack Hammer</description>
+	<description>Validates, tests, and deploys Puppet configurations using Cloudsmith Stack Hammer</description>
 	<url>http://wiki.jenkins-ci.org/display/JENKINS/Stack+Hammer+Plugin</url>
 	<developers>
 		<developer>
@@ -50,7 +50,7 @@
 		<dependency>
 			<groupId>org.cloudsmith.stackhammer</groupId>
 			<artifactId>api</artifactId>
-			<version>1.0.1</version>
+			<version>1.0.2</version>
 		</dependency>
 	</dependencies>
 

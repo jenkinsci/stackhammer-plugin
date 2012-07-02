@@ -27,10 +27,10 @@
   <f:entry title="Branch" field="branch">
     <f:textbox default="master"/>
   </f:entry>
-  <f:entry title="Test names" field="testNames">
+  <f:entry title="Tests" field="testNames">
     <f:textbox/>
   </f:entry>
-  <f:entry title="Undeploy Test Harness" field="undeploy">
+  <f:entry title="Undeploy Harness" field="undeploy">
     <f:booleanRadio default="false"/>
   </f:entry>
   <f:entry title="API Key" field="apiKey">
