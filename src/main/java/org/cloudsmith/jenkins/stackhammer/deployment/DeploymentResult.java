@@ -207,9 +207,6 @@ public class DeploymentResult extends StackOpResult<List<CatalogGraph>> {
 			}
 		}
 
-		for(Map.Entry<String, List<LogEntry>> logEntries : getLogEntriesPerMachine().entrySet())
-			result.add(new HostEntry("unknown", logEntries.getKey(), null, logEntries.getValue()));
-
 		hostEntries = result;
 		return result;
 	}
