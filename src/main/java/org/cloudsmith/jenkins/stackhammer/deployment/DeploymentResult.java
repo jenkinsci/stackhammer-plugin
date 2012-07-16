@@ -95,10 +95,6 @@ public class DeploymentResult extends StackOpResult<List<CatalogGraph>> {
 
 	private List<LogEntry> logEntries;
 
-	private transient Map<String, List<LogEntry>> logEntriesPerHost;
-
-	private transient Map<String, List<LogEntry>> logEntriesPerMachine;
-
 	private transient List<HostEntry> hostEntries;
 
 	public synchronized void addLogEntries(List<LogEntry> newLogEntries) {
@@ -109,8 +105,6 @@ public class DeploymentResult extends StackOpResult<List<CatalogGraph>> {
 
 		// Invalidate cached entries if any
 		hostEntries = null;
-		logEntriesPerHost = null;
-		logEntriesPerMachine = null;
 	}
 
 	@Override
@@ -194,6 +188,7 @@ public class DeploymentResult extends StackOpResult<List<CatalogGraph>> {
 						break;
 				}
 			}
+
 			result.add(new HostEntry(hostName, machineName, catalogGraph, les));
 		}
 
@@ -232,16 +227,27 @@ public class DeploymentResult extends StackOpResult<List<CatalogGraph>> {
 	}
 
 	private synchronized Map<String, List<LogEntry>> getLogEntriesPerHost() {
-		if(logEntriesPerHost != null)
-			return logEntriesPerHost;
+		Map<String, List<LogEntry>> logEntriesPerHost = null;
+		List<LogEntry> les = getLogEntries();
+		List<CatalogGraph> graphs = getResult();
 
-		for(LogEntry le : getLogEntries()) {
+		for(LogEntry le : les) {
 			String hostName = le.getLogicalOrigin();
 			if(hostName == null)
 				continue;
 
+			if(graphs != null && le.getPhysicalOrigin() == null) {
+				for(CatalogGraph cg : graphs) {
+					if(hostName.equals(cg.getNodeName())) {
+						le.setPhysicalOrigin(cg.getInstanceID());
+						break;
+					}
+				}
+			}
+
 			if(logEntriesPerHost == null)
 				logEntriesPerHost = new HashMap<String, List<LogEntry>>();
+
 			List<LogEntry> hostEntries = logEntriesPerHost.get(hostName);
 			if(hostEntries == null) {
 				hostEntries = new ArrayList<LogEntry>();
@@ -249,40 +255,47 @@ public class DeploymentResult extends StackOpResult<List<CatalogGraph>> {
 			}
 			hostEntries.add(le);
 		}
-		if(logEntriesPerHost == null)
-			logEntriesPerHost = Collections.emptyMap();
-		return logEntriesPerHost;
-	}
 
-	/**
-	 * Returns the log entries that origins from machines that are no longer
-	 * attached to a logical host.
-	 */
-	private synchronized Map<String, List<LogEntry>> getLogEntriesPerMachine() {
-		if(logEntriesPerMachine != null)
-			return logEntriesPerMachine;
-
-		for(LogEntry le : getLogEntries()) {
-			if(le.getLogicalOrigin() != null)
+		nextEntry: for(LogEntry le : les) {
+			String hostName = le.getLogicalOrigin();
+			if(hostName != null)
+				// Already added to hostEntries
 				continue;
 
 			String machineName = le.getPhysicalOrigin();
 			if(machineName == null)
 				continue;
 
-			if(logEntriesPerMachine == null)
-				logEntriesPerMachine = new HashMap<String, List<LogEntry>>();
-
-			List<LogEntry> machineEntries = logEntriesPerMachine.get(machineName);
-			if(machineEntries == null) {
-				machineEntries = new ArrayList<LogEntry>();
-				logEntriesPerMachine.put(machineName, machineEntries);
+			if(logEntriesPerHost != null) {
+				// Locate the host using physical machine affinity of existing entries
+				for(Map.Entry<String, List<LogEntry>> entry : logEntriesPerHost.entrySet()) {
+					hostName = entry.getKey();
+					List<LogEntry> hostEntries = entry.getValue();
+					int idx = hostEntries.size();
+					while(--idx >= 0) {
+						LogEntry hostEntry = hostEntries.get(idx);
+						if(machineName.equals(hostEntry.getPhysicalOrigin())) {
+							le.setLogicalOrigin(hostName);
+							hostEntries.add(le);
+							continue nextEntry;
+						}
+					}
+				}
 			}
-			machineEntries.add(le);
+
+			hostName = "Unknown";
+			le.setLogicalOrigin(hostName);
+			List<LogEntry> hostEntries = logEntriesPerHost.get(hostName);
+			if(hostEntries == null) {
+				hostEntries = new ArrayList<LogEntry>();
+				logEntriesPerHost.put(hostName, hostEntries);
+			}
+			hostEntries.add(le);
 		}
-		if(logEntriesPerMachine == null)
-			logEntriesPerMachine = Collections.emptyMap();
-		return logEntriesPerMachine;
+
+		if(logEntriesPerHost == null)
+			logEntriesPerHost = Collections.emptyMap();
+		return logEntriesPerHost;
 	}
 
 	public String getSummary() {
