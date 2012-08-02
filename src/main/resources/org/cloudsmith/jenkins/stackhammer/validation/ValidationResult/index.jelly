@@ -17,7 +17,7 @@
 
 	<l:layout title="Stack Hammer">
 		<l:main-panel>
-			<h1>Stack Hammer Validation Report</h1>
+			<h1>Validation Result</h1>
 			<j:choose>
 				<j:when test="${it.validationGraphURL != null}">
 					<a href="${it.validationGraphURL}" target="_blank">Dependency Graph</a>

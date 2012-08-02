@@ -29,7 +29,7 @@
 				}
 			</script>
 
-			<h1>Stack Hammer Deployment Report</h1>
+			<h1>Deployment Result</h1>
 			<j:choose>
 				<j:when test="${it.hostEntryCount != 0}">
 					<j:forEach var="hostEntry" items="${it.hostEntries}">

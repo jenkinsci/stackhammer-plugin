@@ -80,7 +80,7 @@ public class ValidationResult extends StackOpResult<String> {
 	}
 
 	public String getDisplayName() {
-		return "Validation Report";
+		return "Validation Result";
 	}
 
 	@Override
@@ -112,7 +112,7 @@ public class ValidationResult extends StackOpResult<String> {
 
 	@Override
 	public String getUrlName() {
-		return "stackhammerValidation";
+		return "validationReport";
 	}
 
 	public String getValidationGraphURL() {

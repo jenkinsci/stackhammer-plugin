@@ -157,7 +157,7 @@ public class DeploymentResult extends StackOpResult<List<CatalogGraph>> {
 
 	@Override
 	public String getDisplayName() {
-		return "Deployment Report";
+		return "Deployment Result";
 	}
 
 	public synchronized List<HostEntry> getHostEntries() {
@@ -352,7 +352,7 @@ public class DeploymentResult extends StackOpResult<List<CatalogGraph>> {
 
 	@Override
 	public String getUrlName() {
-		return "stackhammerDeployment";
+		return "deploymentReport";
 	}
 
 	/**
