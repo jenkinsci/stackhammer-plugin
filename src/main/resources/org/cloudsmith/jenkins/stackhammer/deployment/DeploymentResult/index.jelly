@@ -38,8 +38,7 @@
 							<h2>${hostEntry.displayName}</h2>
 							<j:choose>
 								<j:when test="${hostEntry.catalogGraphURL != null}">
-									<a href="${hostEntry.catalogGraphURL}" target="_blank">Catalog Graph
-									</a>
+									<a href="${hostEntry.catalogGraphURL}" target="_blank">Catalog Graph</a>
 								</j:when>
 								<j:otherwise>
 									No catalog graph was generated
@@ -75,7 +74,8 @@
 										</tbody>
 									</table>
 								</j:when>
-								<j:otherwise>The deploy did not produce any log output
+								<j:otherwise>
+									The deploy did not produce any log output
 								</j:otherwise>
 							</j:choose>
 						</div>
