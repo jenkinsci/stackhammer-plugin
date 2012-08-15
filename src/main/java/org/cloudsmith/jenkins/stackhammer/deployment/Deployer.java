@@ -107,7 +107,7 @@ public class Deployer extends Builder {
 			Injector injector = Guice.createInjector(new StackHammerModule(
 				uri.getScheme(), uri.getHost(), uri.getPort(), uri.getPath(), getApiKey()));
 
-			DeploymentResult data = new DeploymentResult();
+			DeploymentResult data = new DeploymentResult(build);
 			build.addAction(data);
 
 			StackHammerFactory factory = injector.getInstance(StackHammerFactory.class);

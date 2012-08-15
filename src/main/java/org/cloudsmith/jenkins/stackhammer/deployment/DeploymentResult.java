@@ -14,6 +14,7 @@
 package org.cloudsmith.jenkins.stackhammer.deployment;
 
 import hudson.Functions;
+import hudson.model.AbstractBuild;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -97,6 +98,10 @@ public class DeploymentResult extends StackOpResult<List<CatalogGraph>> {
 
 	private transient List<HostEntry> hostEntries;
 
+	public DeploymentResult(AbstractBuild<?, ?> build) {
+		super(build);
+	}
+
 	public synchronized void addLogEntries(List<LogEntry> newLogEntries) {
 		if(logEntries == null)
 			logEntries = new ArrayList<LogEntry>(newLogEntries);
@@ -157,7 +162,7 @@ public class DeploymentResult extends StackOpResult<List<CatalogGraph>> {
 
 	@Override
 	public String getDisplayName() {
-		return "Deployment Result";
+		return "Deployment Results";
 	}
 
 	public synchronized List<HostEntry> getHostEntries() {
@@ -348,6 +353,10 @@ public class DeploymentResult extends StackOpResult<List<CatalogGraph>> {
 			bld.append(')');
 		}
 		return bld.toString();
+	}
+
+	public String getTitle() {
+		return "Deployment Result";
 	}
 
 	@Override

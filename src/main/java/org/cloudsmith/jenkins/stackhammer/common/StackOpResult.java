@@ -15,6 +15,7 @@ package org.cloudsmith.jenkins.stackhammer.common;
 
 import hudson.Functions;
 import hudson.model.Action;
+import hudson.model.AbstractBuild;
 import hudson.model.Api;
 
 import java.io.Serializable;
@@ -33,8 +34,18 @@ public abstract class StackOpResult<T> implements Action, Serializable, Cloneabl
 
 	private ResultWithDiagnostic<T> resultDiagnostic;
 
+	private final AbstractBuild<?, ?> build;
+
+	protected StackOpResult(AbstractBuild<?, ?> build) {
+		this.build = build;
+	}
+
 	public Api getApi() {
 		return new Api(this);
+	}
+
+	public AbstractBuild<?, ?> getBuild() {
+		return build;
 	}
 
 	public List<Diagnostic> getCloneDiagnostics() {
@@ -105,6 +116,8 @@ public abstract class StackOpResult<T> implements Action, Serializable, Cloneabl
 				? " warnings"
 				: " warning");
 	}
+
+	public abstract String getTitle();
 
 	protected String getUrlFor(String item) {
 		return getUrlName() + '/' + item;

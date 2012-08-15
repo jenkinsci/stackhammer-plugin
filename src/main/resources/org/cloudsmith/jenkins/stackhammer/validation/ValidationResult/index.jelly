@@ -16,8 +16,9 @@
 	xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
 
 	<l:layout title="Stack Hammer">
+		<st:include page="sidepanel.jelly" it="${it.build}"/>
 		<l:main-panel>
-			<h1>Validation Result</h1>
+			<h1>${it.title}</h1>
 			<j:choose>
 				<j:when test="${it.validationGraphURL != null}">
 					<a href="${it.validationGraphURL}" target="_blank">Dependency Graph</a>

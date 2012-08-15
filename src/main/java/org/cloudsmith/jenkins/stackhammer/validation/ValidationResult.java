@@ -32,10 +32,8 @@ import org.kohsuke.stapler.export.ExportedBean;
 public class ValidationResult extends StackOpResult<String> {
 	private static final long serialVersionUID = 264848698476660935L;
 
-	private final AbstractBuild<?, ?> build;
-
 	public ValidationResult(AbstractBuild<?, ?> build) {
-		this.build = build;
+		super(build);
 	}
 
 	@Override
@@ -80,7 +78,7 @@ public class ValidationResult extends StackOpResult<String> {
 	}
 
 	public String getDisplayName() {
-		return "Validation Result";
+		return "Validation Results";
 	}
 
 	@Override
@@ -108,6 +106,11 @@ public class ValidationResult extends StackOpResult<String> {
 		return getResult() != null
 				? getUrlFor("dependencyGraph")
 				: null;
+	}
+
+	@Override
+	public String getTitle() {
+		return "Validation Result";
 	}
 
 	@Override
