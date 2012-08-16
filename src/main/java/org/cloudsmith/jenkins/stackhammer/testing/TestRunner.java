@@ -219,7 +219,7 @@ public class TestRunner extends Builder {
 			}
 
 			if(runTestsResult.getSeverity() == Diagnostic.ERROR) {
-				listener.error(runTestsResult.toString());
+				// The error has already been logged, so don't repeat it
 				return false;
 			}
 
