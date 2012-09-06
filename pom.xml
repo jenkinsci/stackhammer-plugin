@@ -22,7 +22,7 @@
 
 	<artifactId>stackhammer</artifactId>
 	<packaging>hpi</packaging>
-	<version>1.0.5</version>
+	<version>1.0.6-SNAPSHOT</version>
 	<name>Stack Hammer</name>
 	<description>Validates, tests, and deploys Puppet configurations using Cloudsmith Stack Hammer</description>
 	<url>http://wiki.jenkins-ci.org/display/JENKINS/Stack+Hammer+Plugin</url>
