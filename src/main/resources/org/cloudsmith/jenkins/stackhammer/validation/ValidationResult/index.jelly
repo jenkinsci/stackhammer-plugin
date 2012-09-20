@@ -34,9 +34,10 @@
 					<table id="validationDiagnosticsTable" border="1px" class="pane sortable" style="table-layout:fixed;">
 						<thead>
 							<tr>
-								<td class="pane-header" style="width:70px;">Severity</td>
+								<td class="pane-header" style="width:50px;">Severity</td>
+								<td class="pane-header" style="width:80px;">Type</td>
 								<td class="pane-header">Description</td>
-								<td class="pane-header" style="width:250px">Location</td>
+								<td class="pane-header" style="width:300px">Location</td>
 							</tr>
 						</thead>
 						<tbody>
@@ -44,6 +45,7 @@
 								<j:if test="${diag.resourcePath != null}">
 									<tr>
 										<td>${diag.severityString}</td>
+										<td>${diag.type}</td>
 										<td style="overflow:hidden;text-overflow:ellipsis">${diag.message}</td>
 										<td>
 											<j:choose>
