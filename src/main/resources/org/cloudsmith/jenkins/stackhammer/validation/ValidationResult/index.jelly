@@ -34,8 +34,8 @@
 					<table id="validationDiagnosticsTable" border="1px" class="pane sortable" style="table-layout:fixed;">
 						<thead>
 							<tr>
-								<td class="pane-header" style="width:50px;">Severity</td>
-								<td class="pane-header" style="width:80px;">Type</td>
+								<td class="pane-header" style="width:60px">Severity</td>
+								<td class="pane-header" style="width:85px">Type</td>
 								<td class="pane-header">Description</td>
 								<td class="pane-header" style="width:45%">Location</td>
 							</tr>
@@ -44,8 +44,8 @@
 							<j:forEach var="diag" items="${it.resultDiagnostics}">
 								<j:if test="${diag.resourcePath != null}">
 									<tr>
-										<td>${diag.severityString}</td>
-										<td>${diag.type}</td>
+										<td style="overflow:hidden">${diag.severityString}</td>
+										<td style="overflow:hidden">${diag.type}</td>
 										<td style="overflow:hidden;text-overflow:ellipsis">${diag.message}</td>
 										<td style="overflow:hidden;text-overflow:ellipsis">
 											<j:choose>
