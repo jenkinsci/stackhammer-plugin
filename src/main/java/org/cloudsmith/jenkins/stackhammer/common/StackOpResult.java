@@ -22,7 +22,7 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 
-import org.cloudsmith.stackhammer.api.model.Diagnostic;
+import org.cloudsmith.geppetto.diagnostic.Diagnostic;
 import org.cloudsmith.stackhammer.api.model.MessageWithSeverity;
 import org.cloudsmith.stackhammer.api.model.Repository;
 import org.cloudsmith.stackhammer.api.model.ResultWithDiagnostic;
@@ -84,10 +84,10 @@ public abstract class StackOpResult<T> implements Action, Serializable, Cloneabl
 		return getResultDiagnostics().size();
 	}
 
-	protected String getSummary(List<? extends MessageWithSeverity> messages) {
+	protected String getSummary(List<? extends Diagnostic> messages) {
 		int errorCount = 0;
 		int warningCount = 0;
-		for(MessageWithSeverity msg : messages) {
+		for(Diagnostic msg : messages) {
 			switch(msg.getSeverity()) {
 				case MessageWithSeverity.WARNING:
 					warningCount++;
